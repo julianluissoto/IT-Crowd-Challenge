@@ -1,4 +1,3 @@
-// schema.prisma
 generator client {
   provider = "prisma-client-js"
   output   = "./src/generated/client"
@@ -11,17 +10,25 @@ datasource db {
 
 model Product {
   id          Int    @id @default(autoincrement())
-  name        String
+  name        String @unique
   description String
   image_url   String
   price       Float
-  Brand       Brand? @relation(fields: [brandId], references: [id])
-  brandId     Int?
+  brand       Brand  @relation(fields: [brandId], references: [id])
+  brandId     Int
 }
 
 model Brand {
   id       Int       @id @default(autoincrement())
-  name     String
+  name     String    @unique
   logo_url String
   products Product[]
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  username String?
+  role     String? // Include a role field if users have different roles (e.g., admin, user)
 }

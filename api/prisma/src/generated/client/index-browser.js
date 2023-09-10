@@ -122,6 +122,14 @@ exports.Prisma.BrandScalarFieldEnum = {
   logo_url: 'logo_url'
 };
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  username: 'username',
+  role: 'role'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -140,7 +148,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Product: 'Product',
-  Brand: 'Brand'
+  Brand: 'Brand',
+  User: 'User'
 };
 
 /**
