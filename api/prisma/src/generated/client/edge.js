@@ -176,13 +176,13 @@ const config = {
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "RENDER_DB_URL",
-        "value": null
+        "fromEnvVar": null,
+        "value": "postgresql://postgres:admin@localhost:5432/itcrowd"
       }
     }
   },
-  "inlineSchema": "Ly9nZW5lcmF0b3IgY2xpZW50IHsKLy8gcHJvdmlkZXIgPSAicHJpc21hLWNsaWVudC1qcyIKLy9vdXRwdXQgICA9ICIuL3NyYy9nZW5lcmF0ZWQvY2xpZW50IgovL30KZ2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgICAgICA9ICJwcmlzbWEtY2xpZW50LWpzIgogIG91dHB1dCAgICAgICAgPSAiLi9zcmMvZ2VuZXJhdGVkL2NsaWVudCIKICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiLCAicmhlbC1vcGVuc3NsLTEuMC54Il0KfQoKZGF0YXNvdXJjZSBkYiB7CiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCIKICB1cmwgICAgICA9IGVudigiUkVOREVSX0RCX1VSTCIpCn0KCm1vZGVsIFByb2R1Y3QgewogIGlkICAgICAgICAgIEludCAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQogIG5hbWUgICAgICAgIFN0cmluZyBAdW5pcXVlCiAgZGVzY3JpcHRpb24gU3RyaW5nCiAgaW1hZ2VfdXJsICAgU3RyaW5nCiAgcHJpY2UgICAgICAgRmxvYXQKICBicmFuZCAgICAgICBCcmFuZCAgQHJlbGF0aW9uKGZpZWxkczogW2JyYW5kSWRdLCByZWZlcmVuY2VzOiBbaWRdKQogIGJyYW5kSWQgICAgIEludAp9Cgptb2RlbCBCcmFuZCB7CiAgaWQgICAgICAgSW50ICAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpCiAgbmFtZSAgICAgU3RyaW5nICAgIEB1bmlxdWUKICBsb2dvX3VybCBTdHJpbmc/CiAgcHJvZHVjdHMgUHJvZHVjdFtdCn0KCm1vZGVsIFVzZXIgewogIGlkICAgICAgIEludCAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICBlbWFpbCAgICBTdHJpbmcgIEB1bmlxdWUKICBwYXNzd29yZCBTdHJpbmcKICB1c2VybmFtZSBTdHJpbmc/CiAgcm9sZSAgICAgU3RyaW5nPwp9Cg==",
-  "inlineSchemaHash": "67b08ac61a0d5fc0f3bd67c97ae39e2a0faa93241383a9113999a724e8ad5b41",
+  "inlineSchema": "Ly9nZW5lcmF0b3IgY2xpZW50IHsKLy8gcHJvdmlkZXIgPSAicHJpc21hLWNsaWVudC1qcyIKLy9vdXRwdXQgICA9ICIuL3NyYy9nZW5lcmF0ZWQvY2xpZW50IgovL30KZ2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgICAgICA9ICJwcmlzbWEtY2xpZW50LWpzIgogIG91dHB1dCAgICAgICAgPSAiLi9zcmMvZ2VuZXJhdGVkL2NsaWVudCIKICBiaW5hcnlUYXJnZXRzID0gWyJuYXRpdmUiLCAicmhlbC1vcGVuc3NsLTEuMC54Il0KfQoKZGF0YXNvdXJjZSBkYiB7CiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCIKICB1cmwgICAgICA9ICJwb3N0Z3Jlc3FsOi8vcG9zdGdyZXM6YWRtaW5AbG9jYWxob3N0OjU0MzIvaXRjcm93ZCIKfQoKbW9kZWwgUHJvZHVjdCB7CiAgaWQgICAgICAgICAgSW50ICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpCiAgbmFtZSAgICAgICAgU3RyaW5nIEB1bmlxdWUKICBkZXNjcmlwdGlvbiBTdHJpbmcKICBpbWFnZV91cmwgICBTdHJpbmcKICBwcmljZSAgICAgICBGbG9hdAogIGJyYW5kICAgICAgIEJyYW5kICBAcmVsYXRpb24oZmllbGRzOiBbYnJhbmRJZF0sIHJlZmVyZW5jZXM6IFtpZF0pCiAgYnJhbmRJZCAgICAgSW50Cn0KCm1vZGVsIEJyYW5kIHsKICBpZCAgICAgICBJbnQgICAgICAgQGlkIEBkZWZhdWx0KGF1dG9pbmNyZW1lbnQoKSkKICBuYW1lICAgICBTdHJpbmcgICAgQHVuaXF1ZQogIGxvZ29fdXJsIFN0cmluZz8KICBwcm9kdWN0cyBQcm9kdWN0W10KfQoKbW9kZWwgVXNlciB7CiAgaWQgICAgICAgSW50ICAgICBAaWQgQGRlZmF1bHQoYXV0b2luY3JlbWVudCgpKQogIGVtYWlsICAgIFN0cmluZyAgQHVuaXF1ZQogIHBhc3N3b3JkIFN0cmluZwogIHVzZXJuYW1lIFN0cmluZz8KICByb2xlICAgICBTdHJpbmc/Cn0K",
+  "inlineSchemaHash": "b26515da0a7509a808f5ffea0deaae22ddb020e40f79ae2e7678566dfb406797",
   "noEngine": false
 }
 config.dirname = '/'
@@ -192,9 +192,7 @@ defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 
 
 config.injectableEdgeEnv = () => ({
-  parsed: {
-    RENDER_DB_URL: typeof globalThis !== 'undefined' && globalThis['RENDER_DB_URL'] || typeof process !== 'undefined' && process.env && process.env.RENDER_DB_URL || undefined
-  }
+  parsed: {}
 })
 
 if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
