@@ -4,9 +4,9 @@ const SECRET: string = process.env.SECRET || "";
 
 function verifyToken(req: any, res: any, next: any) {
   if (["POST", "PUT", "DELETE"].includes(req.method)) {
-    try {
-      const token = req.cookies.Authorization; // extract the cookie from the req.cookie and assing to token to later verify
+    const token = req.headers.authorization;
 
+    try {
       if (!token) {
         return res.status(401).json({
           message: "No token provided. Unauthorized. Please login/signup.",

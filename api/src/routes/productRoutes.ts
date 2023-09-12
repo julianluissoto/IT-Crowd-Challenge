@@ -1,62 +1,94 @@
 import { Router } from "express";
 import { PrismaClient } from "../../prisma/src/generated/client";
-import { CreateProductRequest } from "../../interfaces/interface";
-import verifyToken from "../middleware/jwt";
 
+import verifyToken from "../middleware/jwt";
+import cloudinary from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import multer from "multer";
+import dotenv from "dotenv";
 const prisma = new PrismaClient();
 const router = Router();
+if (process.env.NODE_ENV != "production") {
+  dotenv.config();
+}
+
+const cloudinaryConfig = {
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+};
+cloudinary.v2.config(cloudinaryConfig);
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary.v2,
+  params: {},
+});
+const multerMiddleware = multer({ storage });
+
+const uploadMiddleware = multerMiddleware.single("image_url");
 
 router.post("/", verifyToken, async (req, res) => {
-  const {
-    name,
-    description,
-    image_url,
-    price,
-    brandName,
-    brandLogo_url,
-  }: CreateProductRequest = req.body;
-
-  try {
-    // Check if a product with the same name already exists
-    const existingProduct = await prisma.product.findFirst({
-      where: { name },
+  await new Promise<void>((resolve, _reject) => {
+    uploadMiddleware(req, res, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Error en la imagen" });
+      }
+      resolve();
     });
+  });
 
-    if (existingProduct) {
-      return res.status(400).json({ error: "Product already exist" });
-    }
+  const { name, description, price, brandName, brandLogo_url } = req.body;
 
-    // if brand doesn't exist will be created
-    let brand = await prisma.brand.findUnique({
+  const file = req.file;
+  if (!file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
+  let brandId;
+  if (brandName) {
+    const existingBrand = await prisma.brand.findFirst({
       where: { name: brandName },
     });
 
-    if (!brand) {
-      brand = await prisma.brand.create({
+    if (existingBrand) {
+      brandId = existingBrand.id;
+    } else {
+      const newBrand = await prisma.brand.create({
         data: {
           name: brandName,
           logo_url: brandLogo_url,
         },
       });
+      brandId = newBrand.id;
     }
+  }
+  const existingProduct = await prisma.product.findFirst({
+    where: { name },
+  });
 
+  if (existingProduct) {
+    return res.status(400).json({ error: "Product already exists" });
+  }
+
+  try {
     const product = await prisma.product.create({
       data: {
         name,
         description,
-        image_url,
-        price,
-        brand: { connect: { id: brand.id } }, // Associate with the brand by its id
+        image_url: file.path,
+        price: parseFloat(price),
+        brand: {
+          connect: { id: brandId },
+        },
       },
     });
 
-    return res.json(product);
+    return res.json(product); // Respond with the created product
   } catch (error) {
     console.error("Error creating product:", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 router.get("/", async (req, res) => {
   try {
     const { name, description } = req.query;
@@ -113,7 +145,11 @@ router.get("/", async (req, res) => {
       }
     } else {
       // If no query parameters  retrieve all products
-      const allProducts = await prisma.product.findMany();
+      const allProducts = await prisma.product.findMany({
+        include: {
+          brand: true,
+        },
+      });
 
       if (allProducts.length === 0) {
         res.json({ message: "No products found in the database." });

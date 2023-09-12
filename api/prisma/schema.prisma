@@ -21,7 +21,7 @@ model Product {
 model Brand {
   id       Int       @id @default(autoincrement())
   name     String    @unique
-  logo_url String
+  logo_url String?
   products Product[]
 }
 
@@ -30,5 +30,5 @@ model User {
   email    String  @unique
   password String
   username String?
-  role     String? // Include a role field if users have different roles (e.g., admin, user)
+  role     String?
 }

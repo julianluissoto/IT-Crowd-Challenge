@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
 
     // Create jWT token
     const cookieExpirationDate = new Date();
-    cookieExpirationDate.setMinutes(cookieExpirationDate.getMinutes() + 5); // Set expiration to 5 minutes from now
+    cookieExpirationDate.setMinutes(cookieExpirationDate.getMinutes() + 10); // Set expiration to 5 minutes from now
     const exp = 600;
 
     const token = jwt.sign({ userId: newUser.id }, SECRET, {
@@ -47,7 +47,8 @@ router.post("/signup", async (req, res) => {
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
     });
-    return res.send("user logged successfuly");
+    console.log(token);
+    return res.send(`user logged successfuly:  ${token}`);
   } catch (error) {
     console.error(error);
     return res
@@ -76,21 +77,14 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
     const expirationDate = new Date();
-    expirationDate.setMinutes(expirationDate.getMinutes() + 5); // Set expiration to 5 minutes from now
-    const exp = 180;
+    expirationDate.setMinutes(expirationDate.getMinutes() + 10);
+    const exp = 1000;
     // Create and sign a JWT token
     const token = jwt.sign({ userId: user.id }, SECRET, {
-      expiresIn: exp, // Token expires in 180 seconds (3 minutes)
+      expiresIn: exp,
     });
 
-    // Send the token in the response
-    res.cookie("Authorization", token, {
-      expires: expirationDate,
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    });
-    return res.send("user logged successfuly");
+    return res.json({ token });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "An error occurred during login" });

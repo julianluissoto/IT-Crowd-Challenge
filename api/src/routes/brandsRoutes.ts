@@ -1,5 +1,6 @@
 import { PrismaClient } from "../../prisma/src/generated/client";
 import { Router } from "express";
+import verifyToken from "../middleware/jwt";
 
 const prisma = new PrismaClient();
 const router = Router();
@@ -38,6 +39,28 @@ router.get("/:id", async (req, res) => {
     return res
       .status(500)
       .json({ message: "An error occurred while retrieving the product" });
+  }
+});
+router.post("/", verifyToken, async (req, res) => {
+  const { name, brandLogo_url } = req.body;
+
+  try {
+    const existingBrand = await prisma.brand.findFirst({
+      where: { name },
+    });
+
+    if (existingBrand) res.json({ message: "brand already exist" });
+
+    await prisma.brand.create({
+      data: {
+        name,
+        logo_url: brandLogo_url,
+      },
+    });
+    res.json({ message: `Brand: ${name} created` });
+  } catch (error) {
+    console.error("Error creating product:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 export default router;

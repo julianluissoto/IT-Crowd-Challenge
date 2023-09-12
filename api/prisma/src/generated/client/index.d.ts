@@ -2184,7 +2184,7 @@ export namespace Prisma {
   export type BrandGroupByOutputType = {
     id: number
     name: string
-    logo_url: string
+    logo_url: string | null
     _count: BrandCountAggregateOutputType | null
     _avg: BrandAvgAggregateOutputType | null
     _sum: BrandSumAggregateOutputType | null
@@ -2234,7 +2234,7 @@ export namespace Prisma {
     scalars: $Extensions.GetResult<{
       id: number
       name: string
-      logo_url: string
+      logo_url: string | null
     }, ExtArgs["result"]["brand"]>
     composites: {}
   }
@@ -4073,14 +4073,14 @@ export namespace Prisma {
     NOT?: BrandWhereInput | BrandWhereInput[]
     id?: IntFilter<"Brand"> | number
     name?: StringFilter<"Brand"> | string
-    logo_url?: StringFilter<"Brand"> | string
+    logo_url?: StringNullableFilter<"Brand"> | string | null
     products?: ProductListRelationFilter
   }
 
   export type BrandOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    logo_url?: SortOrder
+    logo_url?: SortOrderInput | SortOrder
     products?: ProductOrderByRelationAggregateInput
   }
 
@@ -4090,14 +4090,14 @@ export namespace Prisma {
     AND?: BrandWhereInput | BrandWhereInput[]
     OR?: BrandWhereInput[]
     NOT?: BrandWhereInput | BrandWhereInput[]
-    logo_url?: StringFilter<"Brand"> | string
+    logo_url?: StringNullableFilter<"Brand"> | string | null
     products?: ProductListRelationFilter
   }, "id" | "name">
 
   export type BrandOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    logo_url?: SortOrder
+    logo_url?: SortOrderInput | SortOrder
     _count?: BrandCountOrderByAggregateInput
     _avg?: BrandAvgOrderByAggregateInput
     _max?: BrandMaxOrderByAggregateInput
@@ -4111,7 +4111,7 @@ export namespace Prisma {
     NOT?: BrandScalarWhereWithAggregatesInput | BrandScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Brand"> | number
     name?: StringWithAggregatesFilter<"Brand"> | string
-    logo_url?: StringWithAggregatesFilter<"Brand"> | string
+    logo_url?: StringNullableWithAggregatesFilter<"Brand"> | string | null
   }
 
   export type UserWhereInput = {
@@ -4229,45 +4229,45 @@ export namespace Prisma {
 
   export type BrandCreateInput = {
     name: string
-    logo_url: string
+    logo_url?: string | null
     products?: ProductCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateInput = {
     id?: number
     name: string
-    logo_url: string
+    logo_url?: string | null
     products?: ProductUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    logo_url?: StringFieldUpdateOperationsInput | string
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
     products?: ProductUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    logo_url?: StringFieldUpdateOperationsInput | string
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
     products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandCreateManyInput = {
     id?: number
     name: string
-    logo_url: string
+    logo_url?: string | null
   }
 
   export type BrandUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    logo_url?: StringFieldUpdateOperationsInput | string
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BrandUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    logo_url?: StringFieldUpdateOperationsInput | string
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateInput = {
@@ -4454,10 +4454,30 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type ProductListRelationFilter = {
     every?: ProductWhereInput
     some?: ProductWhereInput
     none?: ProductWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ProductOrderByRelationAggregateInput = {
@@ -4490,7 +4510,7 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -4502,12 +4522,10 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -4540,24 +4558,6 @@ export namespace Prisma {
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type BrandCreateNestedOneWithoutProductsInput = {
@@ -4608,6 +4608,10 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type ProductUpdateManyWithoutBrandNestedInput = {
     create?: XOR<ProductCreateWithoutBrandInput, ProductUncheckedCreateWithoutBrandInput> | ProductCreateWithoutBrandInput[] | ProductUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutBrandInput | ProductCreateOrConnectWithoutBrandInput[]
@@ -4634,10 +4638,6 @@ export namespace Prisma {
     update?: ProductUpdateWithWhereUniqueWithoutBrandInput | ProductUpdateWithWhereUniqueWithoutBrandInput[]
     updateMany?: ProductUpdateManyWithWhereWithoutBrandInput | ProductUpdateManyWithWhereWithoutBrandInput[]
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4769,13 +4769,13 @@ export namespace Prisma {
 
   export type BrandCreateWithoutProductsInput = {
     name: string
-    logo_url: string
+    logo_url?: string | null
   }
 
   export type BrandUncheckedCreateWithoutProductsInput = {
     id?: number
     name: string
-    logo_url: string
+    logo_url?: string | null
   }
 
   export type BrandCreateOrConnectWithoutProductsInput = {
@@ -4796,13 +4796,13 @@ export namespace Prisma {
 
   export type BrandUpdateWithoutProductsInput = {
     name?: StringFieldUpdateOperationsInput | string
-    logo_url?: StringFieldUpdateOperationsInput | string
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BrandUncheckedUpdateWithoutProductsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    logo_url?: StringFieldUpdateOperationsInput | string
+    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProductCreateWithoutBrandInput = {

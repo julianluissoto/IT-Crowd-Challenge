@@ -2,7 +2,7 @@ interface CreateProductRequest {
   name: string;
   description: string;
   image_url: string;
-  price: number;
+  price: GLfloat;
   brandName: string;
   brandLogo_url: string;
 }
