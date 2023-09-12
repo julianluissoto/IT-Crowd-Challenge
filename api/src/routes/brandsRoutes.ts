@@ -5,7 +5,7 @@ import verifyToken from "../middleware/jwt";
 const prisma = new PrismaClient();
 const router = Router();
 
-router.get("/", async (_req, res) => {
+/* router.get("/", async (_req, res) => {
   try {
     const allBrands = await prisma.brand.findMany();
 
@@ -16,9 +16,9 @@ router.get("/", async (_req, res) => {
       .status(500)
       .json({ message: "An error occurred while retrieving brands" });
   }
-});
+}); */
 
-router.get("/:id", async (req, res) => {
+/* router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -40,7 +40,7 @@ router.get("/:id", async (req, res) => {
       .status(500)
       .json({ message: "An error occurred while retrieving the product" });
   }
-});
+}); */
 router.post("/", verifyToken, async (req, res) => {
   const { name, brandLogo_url } = req.body;
 
