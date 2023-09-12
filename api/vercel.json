@@ -11,10 +11,5 @@
       "src": "/api/(.*)",
       "dest": "src/server.ts"
     }
-  ],
-  "functions": {
-    "api/*": {
-      "runtime": "@vercel/node@1.17.3"
-    }
-  }
+  ]
 }
