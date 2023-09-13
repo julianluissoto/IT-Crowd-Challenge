@@ -1,33 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-interface Products {
-  brandId: number;
-  description: string;
-  image_url: string;
-  name: string;
-  price: number;
+interface Brands {
   id: number;
-  brand: {
-    logo_url: string;
-  };
+  name: string;
+  logo_url: string;
 }
 
-export default function useProducts() {
-  const [products, setproducts] = useState<Products[]>([]);
+export default function useBrands() {
+  const [brands, setbrands] = useState<Brands[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [noData, setNoData] = useState(false);
 
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        "https://it-crowd.onrender.com/products"
-      );
+      const response = await axios.get("https://it-crowd.onrender.com/brands");
       if (response.data.message === "No products found in the database.") {
-        setNoData(true);
       }
-      setproducts(response.data.allProducts);
+
+      setbrands(response.data.allBrands);
       setLoading(false);
     } catch (error) {
       setError(true);
@@ -41,9 +32,8 @@ export default function useProducts() {
   }, []);
 
   return {
-    products,
+    brands,
     loading,
     error,
-    noData,
   };
 }

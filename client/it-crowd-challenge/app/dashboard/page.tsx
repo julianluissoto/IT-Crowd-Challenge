@@ -4,6 +4,7 @@ import ProductForm from "../components/ProductsForm";
 import ProtectedRoute from "../components/ProtectedRoute";
 import BrandCreationForm from "../components/BrandCreationForm";
 import AllProductToEdit from "../components/AllProductToEdit";
+import LogoutButton from "../components/LogoutButtton";
 
 const AdminDashboard = () => {
   return (
@@ -15,6 +16,7 @@ const AdminDashboard = () => {
             Home
           </button>
         </Link>
+        <LogoutButton />
         <div className="flex flex-col md:flex-row w-3/4 m-auto">
           <div>
             <BrandCreationForm />
