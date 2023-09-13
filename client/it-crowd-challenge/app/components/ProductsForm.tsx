@@ -15,7 +15,7 @@ const ProductForm = () => {
     brandLogo_url: null, // Store the selected brand logo file
   });
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-
+  const [sending, setSending] = useState(false);
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +54,7 @@ const ProductForm = () => {
       },
     };
     try {
+      setSending(true);
       const response = await axios.post(
         "https://it-crowd.onrender.com/products",
         formDataWithFiles,
@@ -91,6 +92,8 @@ const ProductForm = () => {
           router.push("/login");
         }
       }
+    } finally {
+      setSending(false);
     }
   };
 
@@ -203,7 +206,7 @@ const ProductForm = () => {
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Create Product
+            {sending ? "Sending..." : "Create Product"}
           </button>
         </div>
       </form>
