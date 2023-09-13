@@ -13,10 +13,13 @@ const Signup = () => {
     e.preventDefault();
     console.log(email, password);
     try {
-      const response = await axios.post("http://localhost:3000/user/signup", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://it-crowd.onrender.com/user/signup",
+        {
+          email,
+          password,
+        }
+      );
 
       if (response.status === 200) {
         Swal.fire({
