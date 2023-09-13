@@ -41,7 +41,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
       <h2 className="text-2xl font-semibold mb-4 text-cyan-400">
         Product Detail
       </h2>
-      <div className="flex flex-col md:flex-row bg-slate-300 shadow-lg rounded-lg overflow-hidden">
+      <div className="flex flex-col md:flex-row bg-slate-400 shadow-lg rounded-lg overflow-hidden">
         <div className="md:w-1/2 p-4 m-auto">
           <img
             src={productDetail.image_url}
