@@ -81,7 +81,7 @@ router.post("/", verifyToken, async (req, res) => {
       },
     });
 
-    return res.json({ ...product, brandLogo_url }); // Respond with the created product and brandLogo_url
+    return res.json({ ...product, brandLogo_url });
   } catch (error) {
     console.error("Error creating product:", error);
     return res.status(500).json({ error: "Internal Server Error" });

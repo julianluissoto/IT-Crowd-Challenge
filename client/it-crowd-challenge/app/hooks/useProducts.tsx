@@ -17,7 +17,7 @@ export default function useProducts() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [noData, setNoData] = useState(false);
-
+  console.log(products);
   const getAllProducts = async () => {
     try {
       setLoading(true);

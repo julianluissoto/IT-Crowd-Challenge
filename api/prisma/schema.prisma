@@ -26,7 +26,7 @@ model Product {
 model Brand {
   id       Int       @id @default(autoincrement())
   name     String    @unique
-  logo_url String?
+  logo_url String
   products Product[]
 }
 
