@@ -17,7 +17,7 @@ export default function useBrands() {
       const response = await axios.get("https://it-crowd.onrender.com/brands");
       if (response.data.message === "No products found in the database.") {
       }
-      console.log(response);
+
       setbrands(response.data.allBrands);
       setLoading(false);
     } catch (error) {
