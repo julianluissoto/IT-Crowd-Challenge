@@ -60,7 +60,7 @@ const ProductForm = () => {
         config
       );
 
-      if (response.statusText === "OK") {
+      if (response.status === 200) {
         Swal.fire({
           icon: "success",
           title: "New Product",

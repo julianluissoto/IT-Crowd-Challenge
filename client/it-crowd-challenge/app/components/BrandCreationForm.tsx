@@ -33,7 +33,7 @@ const BrandCreationForm = () => {
         Swal.fire({
           icon: "success",
           title: "New Product",
-          text: "New Product added successfuly",
+          text: "New Brand added successfuly",
           timer: 3000,
           timerProgressBar: true,
           showConfirmButton: false,
@@ -50,7 +50,7 @@ const BrandCreationForm = () => {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: "Debes loguearte para crear una marca",
+          text: "login to create a brand",
         });
         router.push("/login");
       } else {

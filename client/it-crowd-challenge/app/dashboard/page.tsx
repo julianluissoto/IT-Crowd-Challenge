@@ -10,7 +10,7 @@ const AdminDashboard = () => {
     <ProtectedRoute>
       <div className="max-w-6xl mx-auto ">
         <h2 className="text-2xl font-semibold mb-4">Admin Dashboard</h2>
-        <Link href={"http://localhost:3001/"}>
+        <Link href={"https://it-crowd-challenge-rho.vercel.app/"}>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Home
           </button>
