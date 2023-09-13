@@ -30,7 +30,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({ onFilter, onClear }) => {
   };
 
   return (
-    <div className="bg-gray-200 p-4 rounded shadow-md mb-4 h-1/2 ">
+    <div className="bg-gray-200 p-4 rounded shadow-md mb-4 ">
       <h2 className="text-xl font-semibold mb-2">Filter Products</h2>
       <form onSubmit={handleFilterSubmit} className="space-y-2">
         <div className="flex flex-col space-y-1">

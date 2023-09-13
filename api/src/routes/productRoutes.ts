@@ -38,30 +38,28 @@ router.post("/", verifyToken, async (req, res) => {
     });
   });
 
-  const { name, description, price, brandName, brandLogo_url } = req.body;
-
+  const { name, description, price, brandName } = req.body;
   const file = req.file;
+
   if (!file) {
     return res.status(400).json({ error: "No file uploaded" });
   }
-  let brandId;
+
+  let brandLogo_url: string | undefined;
+  let brandId: number | undefined;
   if (brandName) {
     const existingBrand = await prisma.brand.findFirst({
       where: { name: brandName },
     });
 
     if (existingBrand) {
-      brandId = existingBrand.id;
+      brandId = existingBrand.id!;
+      brandLogo_url = existingBrand.logo_url!;
     } else {
-      const newBrand = await prisma.brand.create({
-        data: {
-          name: brandName,
-          logo_url: brandLogo_url,
-        },
-      });
-      brandId = newBrand.id;
+      return res.status(400).json({ error: "Brand not found" });
     }
   }
+
   const existingProduct = await prisma.product.findFirst({
     where: { name },
   });
@@ -83,12 +81,13 @@ router.post("/", verifyToken, async (req, res) => {
       },
     });
 
-    return res.json(product); // Respond with the created product
+    return res.json({ ...product, brandLogo_url }); // Respond with the created product and brandLogo_url
   } catch (error) {
     console.error("Error creating product:", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 router.get("/", async (req, res) => {
   try {
     const { name, description } = req.query;
