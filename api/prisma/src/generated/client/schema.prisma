@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:admin@localhost:5432/itcrowd"
+  url      = env("DATABASE_URL")
 }
 
 model Product {
