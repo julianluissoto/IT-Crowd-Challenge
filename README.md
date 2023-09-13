@@ -1,38 +1,106 @@
-# IT Crowd Challenge
+# IT CROWD - CHALLENGE
 
-IT Crowd Challenge is a project that provides RESTful APIs for managing products, brands, and user authentication and authorization using JSON Web Tokens (JWT).
+## Web Application
 
-## Table of Contents
+## Description
 
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Server](#running-the-server)
-- [Project Structure](#project-structure)
-- [Technologies Used](#technologies-used)
-- [API Endpoints](#api-endpoints)
-- [Authentication and Authorization](#authentication-and-authorization)
-  - [Middleware](#middleware)
+This web application, is designed to provide users with a platform for various tasks, including user registration, authentication, product and brand management, and im working on more features. It utilizes a full-stack architecture with both frontend and backend components.
+
+## Technologies Used
+
+### Frontend
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Cloudinary
+
+### Backend
+
+- Node.js
+- TypeScript
+- Express.js
+- PostgreSQL
+- Prisma
+- JWT
+
+## Running the Application Locally
+
+### Frontend
+
+1. Clone the frontend repository.
+2. Navigate to the frontend directory.
+3. Install dependencies with `npm install` or `yarn install`.
+4. Set the required environment variables (if any).
+5. Start the development server with `npm start` or `yarn start`.
+
+### Backend
+
+1. Clone the backend repository.
+2. Navigate to the backend directory.
+3. Install dependencies with `npm install` or `yarn install`.
+4. Set the required environment variables (if any).
+5. Start the server with `npm start` or `yarn start`.
+
+## .env
+
+DATABASE_URL=postgres://julian:XkrRWonI6nRLjQNwuRezZhG3VriyHlK8@dpg-ck0bca36fquc73a3v65g-a.oregon-postgres.render.com/itcrowd
+
+SECRET= itcrowd
+
+CLOUDINARY_CLOUD_NAME=julian-soto
+CLOUDINARY_API_KEY=294192131485266
+CLOUDINARY_API_SECRET=PpXtSK7I3XwoI9mbr9xlX8jQqyQ
+
+## API Documentation
+
+The IT CROWD API provides the following endpoints:
+
+- `/user` (POST): Create a new user.
+- `/signup` (POST): User signup.
+- `/login` (POST): User login.
+- `/products` (GET, POST): Get all products, create a new product.
+- `/products/:id` (GET, PUT, DELETE): Get, update, or delete a specific product by ID.
+- `/brands` (GET, POST): Get all brands, create a new brand.
 -
 
-## Getting Started
+## Authentication
 
-### Prerequisites
+- User authentication is implemented using JWT tokens.
+- Users can register, log in, and obtain JWT tokens for authenticated access and setted on header as "Authorization"
 
-Before running the project, make sure you have the following prerequisites installed:
+## Database Schema
 
-- [Node.js](https://nodejs.org/) (v16.0.0 or higher)
-- [npm](https://www.npmjs.com/) (v7.0.0 or higher)
-- [TypeScript](https://www.typescriptlang.org/) (v4.0.0 or higher)
+The database schema includes tables for users, products, and brands. Relationships between these tables are defined to manage data effectively.
 
-### Installation
+## Deployment
 
-1. Clone the repository:
+- [Frontend Deployment](https://your-frontend-deployment-url.com)
+- [Backend Deployment](https://your-backend-deployment-url.com)
 
-   ```bash
-   git clone <repository-url>
-   ```
+## Security Considerations
 
-## Navigate to the project directory:
+- JWT tokens are securely managed for user authentication.
+-
 
-cd it-crowd-challenge
+## Testing
+
+No testing implemented yet.
+
+## Contributing
+
+Contributions to this project are welcome. Please follow our contribution guidelines.
+
+## Authors
+
+- [Julian Soto](https://www.linkedin.com/in/julian-soto-dev/)
+
+## Contact Information
+
+For inquiries or support, you can reach out to [julianlasoto@gmail.com](mailto:julianlasoto@gmail.com).
+
+## Screenshots
+
+## Acknowledgments
+
+- Thank you to the open-source community for their valuable contributions.
