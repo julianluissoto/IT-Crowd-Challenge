@@ -53,12 +53,12 @@ export default function AllProducts() {
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">All Products</h2>
-      <Link href={"https://it-crowd-challenge-pearl.vercel.app/login"}>
+      <Link href={"/login"}>
         <button className="bg-blue-500 hover:bg-blue-700 mb-4 mr-4 text-white font-bold py-2 px-4 rounded">
           Admin Login
         </button>
       </Link>
-      <Link href={"https://it-crowd-challenge-pearl.vercel.app/dashboard"}>
+      <Link href={"/dashboard"}>
         <button className="bg-indigo-500 hover:bg-indigo-700 mb-4 text-white font-bold py-2 px-4 rounded">
           Dashboard
         </button>
