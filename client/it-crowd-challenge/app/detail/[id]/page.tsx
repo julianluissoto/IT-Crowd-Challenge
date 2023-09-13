@@ -33,7 +33,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
 
   return (
     <div className="w-3/4 m-auto p-4">
-      <Link href={"https://it-crowd-challenge-pearl.vercel.app/"}>
+      <Link href={"/"}>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Back
         </button>
