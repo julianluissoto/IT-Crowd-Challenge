@@ -189,7 +189,7 @@ const ProductForm = () => {
           />
         </div>
         {imagePreview && (
-          <div className="mb-4">
+          <div className="mb-2">
             <img
               src={imagePreview}
               alt="Image Preview"
