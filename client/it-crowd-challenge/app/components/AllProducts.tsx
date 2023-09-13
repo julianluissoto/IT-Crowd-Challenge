@@ -52,66 +52,74 @@ export default function AllProducts() {
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">All Products</h2>
-      <Link href={"https://it-crowd.onrender.com/login"}>
+      <Link href={"http://localhost:3001/login"}>
         <button className="bg-blue-500 hover:bg-blue-700 mb-4 mr-4 text-white font-bold py-2 px-4 rounded">
           Admin Login
         </button>
       </Link>
-      <Link href={"https://it-crowd.onrender.com/dashboard"}>
+      <Link href={"http://localhost:3001/dashboard"}>
         <button className="bg-indigo-500 hover:bg-indigo-700 mb-4 text-white font-bold py-2 px-4 rounded">
           Dashboard
         </button>
       </Link>
-      <div className="md:flex md:justify-center">
-        <ProductFilter onFilter={handleFilter} onClear={clearFilters} />
-        {noData && <p>NO PRODUCTS FOUND</p>}
-        {loading && products?.length != 0 ? (
-          <p>CARGANDO PRODUCTOS...</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            {currentProducts?.map((product) => (
-              <Link
-                key={product.id}
-                className="min-w-[15rem]"
-                href={`/detail/${product.id}`}
-              >
-                <div className="bg-slate-200 rounded-lg shadow-md flex justify-center">
-                  <div className="h-52 flex align-middle">
-                    <img
-                      className="w-40 h-auto  p-2 aspect-video "
-                      src={product.image_url}
-                      alt={product.name}
-                    />
-                  </div>
+      <div className="md:flex md:justify-around">
+        <div>
+          <ProductFilter onFilter={handleFilter} onClear={clearFilters} />
+        </div>
+        <div className="">
+          {loading ? (
+            <p>CARGANDO PRODUCTOS...</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              {currentProducts?.map((product) => (
+                <Link
+                  key={product.id}
+                  className="min-w-[15rem]"
+                  href={`/detail/${product.id}`}
+                >
+                  <div className="bg-slate-200 rounded-lg shadow-md flex justify-center">
+                    <div className="h-52 flex align-middle">
+                      <img
+                        className="w-40 h-auto  p-2 aspect-video "
+                        src={product.image_url}
+                        alt={product.name}
+                      />
+                    </div>
 
-                  <div className="p-4 flex flex-col justify-center">
-                    <p className="text-xl font-semibold">{product.name}</p>
-                    <p className="text-gray-600">${product.price.toFixed(2)}</p>
+                    <div className="p-4 flex flex-col justify-center">
+                      <p className="text-xl font-semibold">{product.name}</p>
+                      <p className="text-gray-600">
+                        ${product.price.toFixed(2)}
+                      </p>
+                    </div>
+                    <div>
+                      <img
+                        className="h-12 w-auto"
+                        src={product.brand.logo_url}
+                        alt={product.name}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <img
-                      className="h-12 w-auto"
-                      src={product.brand.logo_url}
-                      alt={product.name}
-                    />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+                </Link>
+              ))}
+            </div>
+          )}
+          {noData && (
+            <p className="text-center text-orange-700">NO PRODUCTS FOUND</p>
+          )}
+          <Pagination
+            currentPage={currentPage}
+            itemsPerPage={productsPerPage}
+            totalItems={
+              filteredProducts.length > 0
+                ? filteredProducts.length
+                : products?.length
+            }
+            onPageChange={paginate}
+          />
+          {error && <p className="text-red-500">Error loading products.</p>}
+        </div>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        itemsPerPage={productsPerPage}
-        totalItems={
-          filteredProducts.length > 0
-            ? filteredProducts.length
-            : products?.length
-        }
-        onPageChange={paginate}
-      />
-      {error && <p className="text-red-500">Error loading products.</p>}
     </div>
   );
 }

@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
-
+import axios, { AxiosError } from "axios";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 const BrandCreationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     logoUrl: "",
   });
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,15 +30,37 @@ const BrandCreationForm = () => {
       );
 
       if (response.status === 200) {
-        console.log("Brand created successfully");
+        Swal.fire({
+          icon: "success",
+          title: "New Product",
+          text: "New Product added successfuly",
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
 
         setFormData({
           name: "",
           logoUrl: "",
         });
       }
-    } catch (error) {
-      console.error("Error creating brand:", error);
+    } catch (error: AxiosError | any) {
+      console.error(error);
+      if (error.response && error.response.status === 401) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Debes loguearte para crear una marca",
+        });
+        router.push("/login");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred while creating a brand. Please try again.",
+          showConfirmButton: true,
+        });
+      }
     }
   };
 

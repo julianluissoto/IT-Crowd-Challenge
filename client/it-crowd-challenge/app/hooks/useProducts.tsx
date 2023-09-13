@@ -24,8 +24,7 @@ export default function useProducts() {
       const response = await axios.get(
         "https://it-crowd.onrender.com/products"
       );
-      if (response.data.length === 0) {
-        console.log("hook", response.data.length);
+      if (response.data.message === "No products found in the database.") {
         setNoData(true);
       }
       setproducts(response.data.allProducts);
