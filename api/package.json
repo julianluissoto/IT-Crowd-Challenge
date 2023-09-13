@@ -1,11 +1,13 @@
 {
+  "engines": {
+    "node": "16.13.0"
+  },
   "name": "it-crowd-challenge",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node ./build/index.js",
-    "vercel-build": "echo deploy",
     "build": "tsc",
     "prisma:generate": "npx prisma generate",
     "dev": "ts-node-dev src/index.ts",
