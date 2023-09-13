@@ -13,7 +13,6 @@ export default function AllProducts() {
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 6;
-  console.log(noData);
 
   const handleFilter = (filters: Filters) => {
     const filtered = products.filter((product) => {

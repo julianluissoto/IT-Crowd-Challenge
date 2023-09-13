@@ -18,9 +18,9 @@ app.use(morgan("dev"));
 app.use(json());
 app.use(cookieParser());
 app.use(cors());
+app.use("/brands", brands);
 app.use("/products", products);
 app.use("/products/:id", products);
-app.use("/brands", brands);
 app.use("/user", user);
 
 app.listen(PORT, () => {
