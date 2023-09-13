@@ -150,7 +150,6 @@ router.get("/", async (req, res) => {
           brand: true,
         },
       });
-      console.log(allProducts);
 
       if (allProducts.length === 0) {
         res.json({ message: "No products found in the database." });

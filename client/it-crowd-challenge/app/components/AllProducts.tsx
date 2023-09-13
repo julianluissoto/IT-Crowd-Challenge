@@ -13,7 +13,7 @@ export default function AllProducts() {
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 6;
-  console.log(loading);
+
   const handleFilter = (filters: Filters) => {
     const filtered = products.filter((product) => {
       return (
@@ -39,7 +39,7 @@ export default function AllProducts() {
   const currentProducts =
     filteredProducts.length > 0
       ? filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
-      : products.slice(indexOfFirstProduct, indexOfLastProduct);
+      : products?.slice(indexOfFirstProduct, indexOfLastProduct);
 
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -68,7 +68,7 @@ export default function AllProducts() {
           <Loading />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            {currentProducts.map((product) => (
+            {currentProducts?.map((product) => (
               <Link
                 key={product.id}
                 className="min-w-[15rem]"
@@ -106,7 +106,7 @@ export default function AllProducts() {
         totalItems={
           filteredProducts.length > 0
             ? filteredProducts.length
-            : products.length
+            : products?.length
         }
         onPageChange={paginate}
       />

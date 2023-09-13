@@ -87,6 +87,11 @@ export default function AllProductToEdit() {
       <div className="p-4 ">
         <h3 className="text-2xl font-semibold mb-4">UPDATE PRODUCTS</h3>
       </div>
+      {!products && (
+        <p className="text-orange-700 text-center">
+          No hay productos agregados
+        </p>
+      )}
       {products?.map((product) => (
         <div
           key={product.id}
