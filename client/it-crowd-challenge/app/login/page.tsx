@@ -13,10 +13,13 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/user/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://it-crowd.onrender.com/user/login",
+        {
+          email,
+          password,
+        }
+      );
 
       if (response.status === 200) {
         const { token } = response.data;

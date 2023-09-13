@@ -20,7 +20,9 @@ export default function useProducts() {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/products");
+      const response = await axios.get(
+        "https://it-crowd.onrender.com/products"
+      );
       setproducts(response.data.allProducts);
       setLoading(false);
     } catch (error) {

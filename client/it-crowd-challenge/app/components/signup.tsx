@@ -21,8 +21,8 @@ const Signup = () => {
       if (response.status === 200) {
         Swal.fire({
           icon: "success",
-          title: "Registrado con exito",
-          text: "Te has registrado exitosamente en It Crowd",
+          title: "Register successfully",
+          text: "You Registered successfully on It Crowd",
           timer: 3000,
           timerProgressBar: true,
           showConfirmButton: false,

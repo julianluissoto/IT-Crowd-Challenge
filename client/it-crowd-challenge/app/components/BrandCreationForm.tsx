@@ -23,7 +23,7 @@ const BrandCreationForm = () => {
     try {
       // Send a POST request to your backend API to create the brand
       const response = await axios.post(
-        "http://localhost:3000/brands",
+        "https://it-crowd.onrender.com/brands",
         formData
       );
 

@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     if (!authToken) {
       router.push("/login"); // Redirect to the login page if no token is found
     }
-  }, []); // This effect runs only once when the component mounts
+  }, []);
 
   return children;
 };

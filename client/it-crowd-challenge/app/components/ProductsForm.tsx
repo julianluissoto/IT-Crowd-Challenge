@@ -55,7 +55,7 @@ const ProductForm = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3000/products",
+        "https://it-crowd.onrender.com/products",
         formDataWithFiles,
         config
       );
