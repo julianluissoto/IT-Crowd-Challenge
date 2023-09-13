@@ -1,7 +1,8 @@
 "use client";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 interface Products {
   brandId: number;
   description: string;
@@ -15,11 +16,14 @@ export default function AllProductToEdit() {
   const [editableProduct, setEditableProduct] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const router = useRouter();
 
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/products");
+      const response = await axios.get(
+        "https://it-crowd.onrender.com/products"
+      );
       setProducts(response.data.allProducts);
       setLoading(false);
     } catch (error) {
@@ -48,7 +52,7 @@ export default function AllProductToEdit() {
       }
 
       const updatedProduct = await axios.put(
-        `http://localhost:3000/products/${productId}`,
+        `https://it-crowd.onrender.com/products/${productId}`,
         productToEdit
       );
 
@@ -82,16 +86,48 @@ export default function AllProductToEdit() {
     }
   };
 
+  const handleProductDelete = async (productId: number) => {
+    try {
+      await axios.delete(`https://it-crowd.onrender.com/products/${productId}`);
+      // Remove the deleted product from the state
+      setProducts((prevProducts) =>
+        prevProducts.filter((prevProduct) => prevProduct.id !== productId)
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Product Deleted",
+        text: "The product has been successfully deleted.",
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+    } catch (error: AxiosError | any) {
+      console.error(error);
+      if (error.response && error.response.status === 401) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Debes loguearte para eliminar un producto",
+        });
+        router.push("/login");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred while deleting the product. Please try again.",
+          showConfirmButton: true,
+        });
+      }
+    }
+  };
+
   return (
     <div>
       <div className="p-4 ">
         <h3 className="text-2xl font-semibold mb-4">UPDATE PRODUCTS</h3>
       </div>
-      {!products && (
-        <p className="text-orange-700 text-center">
-          No hay productos agregados
-        </p>
-      )}
+      {loading && <p className="text-center text-3xl">CARGANDO PRODUCTOS...</p>}
       {products?.map((product) => (
         <div
           key={product.id}
@@ -149,7 +185,7 @@ export default function AllProductToEdit() {
               </button>
               <button
                 onClick={handleCancelEdit}
-                className="bg-red-500 text-white px-4 py-2 rounded-md m-2 hover:bg-red-600"
+                className="bg-amber-500 text-white px-4 py-2 rounded-md m-2 hover:bg-amber-600"
               >
                 Cancel
               </button>
@@ -164,6 +200,12 @@ export default function AllProductToEdit() {
                 className="bg-green-500 text-white px-4 py-2 rounded-md m-2 hover:bg-green-600"
               >
                 Edit
+              </button>
+              <button
+                onClick={() => handleProductDelete(product.id)}
+                className="bg-orange-800 text-white px-4 py-2 rounded-md m-2 hover:bg-orange-600"
+              >
+                Delete
               </button>
             </div>
           )}

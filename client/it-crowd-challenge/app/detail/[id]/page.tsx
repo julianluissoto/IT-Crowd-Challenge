@@ -21,7 +21,9 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
 
   const { id } = params;
   const getProductById = async () => {
-    const product = await axios.get(`http://localhost:3000/products/${id}`);
+    const product = await axios.get(
+      `https://it-crowd.onrender.com/products/${id}`
+    );
     setProductDetail(product.data.product);
   };
 

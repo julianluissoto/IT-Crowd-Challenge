@@ -16,11 +16,18 @@ export default function useProducts() {
   const [products, setproducts] = useState<Products[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [noData, setNoData] = useState(false);
 
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/products");
+      const response = await axios.get(
+        "https://it-crowd.onrender.com/products"
+      );
+      if (response.data.length === 0) {
+        console.log("hook", response.data.length);
+        setNoData(true);
+      }
       setproducts(response.data.allProducts);
       setLoading(false);
     } catch (error) {
@@ -38,5 +45,6 @@ export default function useProducts() {
     products,
     loading,
     error,
+    noData,
   };
 }
