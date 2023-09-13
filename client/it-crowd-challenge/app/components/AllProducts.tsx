@@ -9,10 +9,11 @@ import { Products } from "../interface/product";
 import { Filters } from "../interface/filters";
 
 export default function AllProducts() {
-  const { products, loading, error } = useProducts();
+  const { products, loading, error, noData } = useProducts();
   const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 6;
+  console.log(noData);
 
   const handleFilter = (filters: Filters) => {
     const filtered = products.filter((product) => {
@@ -63,7 +64,7 @@ export default function AllProducts() {
       </Link>
       <div className="md:flex md:justify-center">
         <ProductFilter onFilter={handleFilter} onClear={clearFilters} />
-        {products?.length === 0 && <p>NO SE CREARON PRODUCTOS</p>}
+        {noData && <p>NO PRODUCTS FOUND</p>}
         {loading && products?.length != 0 ? (
           <p>CARGANDO PRODUCTOS...</p>
         ) : (
