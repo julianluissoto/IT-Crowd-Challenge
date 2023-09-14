@@ -60,7 +60,9 @@ The IT CROWD API provides the following endpoints:
 
 
 ## Authentication
-
+For login there is a user already created if you want to use it 
+## Use user: test@test.com
+## Password : test1234
 - User authentication is implemented using JWT tokens.
 - Users can register, log in, and obtain JWT tokens for authenticated access and setted on header as "Authorization"
 
