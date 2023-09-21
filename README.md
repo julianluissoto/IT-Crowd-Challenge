@@ -36,14 +36,7 @@ This web application,  is designed to provide users with a platform for various 
 4. Set the required environment variables (if any).
 5. Start the server with `npm start` or `yarn start`.
 
-## .env
-DATABASE_URL=postgres://julian:XkrRWonI6nRLjQNwuRezZhG3VriyHlK8@dpg-ck0bca36fquc73a3v65g-a.oregon-postgres.render.com/itcrowd
 
-SECRET= itcrowd
-
-CLOUDINARY_CLOUD_NAME=julian-soto
-CLOUDINARY_API_KEY=294192131485266
-CLOUDINARY_API_SECRET=PpXtSK7I3XwoI9mbr9xlX8jQqyQ
 
 ## API Documentation
 
